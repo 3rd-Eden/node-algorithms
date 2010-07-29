@@ -1,4 +1,5 @@
 // see http://en.wikipedia.org/wiki/Soundex
+// Soundex allows you to check how close strings are matching. 
 exports.soundex = function( string ){
 	string = string.toUpperCase();
 	
@@ -25,6 +26,7 @@ exports.soundex = function( string ){
 };
 
 // see http://en.wikipedia.org/wiki/Bisection_method
+// What it basically does is return the index where item X should be placed in the array, assuming the array is sorted
 exports.bisect = exports.bisectRight = function( array, x, low, high ){
 	
 	// The low and high bounds the inital slice of the array that needs to be searched
@@ -41,6 +43,27 @@ exports.bisect = exports.bisectRight = function( array, x, low, high ){
 			high = mid;
 		else 
 			low = mid + 1;
+	}
+	
+	return low;
+};
+
+exports.bisectLeft = function( array, x, low, high ){
+	
+	// The low and high bounds the inital slice of the array that needs to be searched
+	// this is optional
+	low = low || 0;
+	high = high || array.length;
+	
+	var mid;
+	
+	while( low < high ){
+		mid = Math.floor( ( low + high ) / 2 );
+		
+		if( x < array[ mid ] )
+			low = mid + 1;
+		else 
+			high = mid;
 	}
 	
 	return low;
