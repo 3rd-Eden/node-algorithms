@@ -3,7 +3,7 @@
  * @param {String} string the String that needs to be converted to a soundex value.
  * @return {String} the soundex of the string
  */
-exports.soundex = function( string ){
+exports.soundex = function soundex( string ){
 	string = string.toUpperCase();
 	
 	// soundex information
@@ -17,7 +17,7 @@ exports.soundex = function( string ){
 		for(; i < length; i++ ){
 			j = keys.length;
 			while( s != 3 && j-- ){
-				if( keys[j].search( string[i] ) !== -1 ){
+				if( keys[j].indexOf( string[i] ) !== -1 ){
 					code = map[ keys[j] ];
 					if( code != soundx[ s ] )
 						soundx[ ++s ] += code;
@@ -36,7 +36,7 @@ exports.soundex = function( string ){
  * @param {int} high The maximum Index that is used to stop searching, optional.
  * @return {int} the index where item X should be placed
  */
-exports.bisect = exports.bisectRight = function( array, x, low, high ){
+exports.bisect = exports.bisectRight = function bisectRight( array, x, low, high ){
 	
 	// The low and high bounds the inital slice of the array that needs to be searched
 	// this is optional
@@ -65,7 +65,7 @@ exports.bisect = exports.bisectRight = function( array, x, low, high ){
  * @param {int} high The maximum Index that is used to stop searching, optional.
  * @return {int} the index where item X should be placed
  */
-exports.bisectLeft = function( array, x, low , high ){
+exports.bisectLeft = function bisectLeft( array, x, low , high ){
 	
 	// The low and high bounds the inital slice of the array that needs to be searched
 	// this is optional
@@ -95,13 +95,13 @@ exports.bisectLeft = function( array, x, low , high ){
  * @param {int} value The value that is used for the padding, optional. If omitted the padding index is used. 
  * @return {Array} The array with padding applied. 
  */
-var range = function( array, size, value ){
+var range = function range( array, size, value ){
 	var length = Math.abs( size ) - array.length, i = 0;
     if( length <= 0 )
       return array;
 	
 	for(; i <= length; i++ )
-		size < 0 ? array.unshift( value || i ) : array[ array.length ] = value || i;
+		size < 0 ? array.unshift( value || i ) : array.push( value || i );
     
     return array;
 };
@@ -112,7 +112,7 @@ var range = function( array, size, value ){
  * @param {String} b Item 2.
  * @return {int} the distance.
  */
-exports.levenshtein = function( a, b ){
+exports.levenshtein = function levenshtein( a, b ){
 	if( a === b ) return 0;
 	
 	var a_len = a.length, b_len = b.length, tmp;
@@ -157,7 +157,7 @@ exports.levenshtein = function( a, b ){
 		}
 	}
 	
-	return current[ a_len ]
+	return current[ a_len ];
 	
 };
 
@@ -175,7 +175,7 @@ exports.levenshtein = function( a, b ){
  * @param {int} secondIndex Index of second item to swap.
  * @return {void}
  */
-var swap = function(items, firstIndex, secondIndex ){
+var swap = function swap( items, firstIndex, secondIndex ){
     var temp = items[ firstIndex ];
     items[ firstIndex ] = items[ secondIndex ];
     items[ secondIndex ] = temp;
@@ -188,7 +188,7 @@ var swap = function(items, firstIndex, secondIndex ){
  * @param {Array} items An array of items to sort.
  * @return {Array} The sorted array.
  */
-exports.bubbleSort = function(items){
+exports.bubbleSort = function bubbleSort( items ){
     var len = items.length,
         i = len-1, j;
 
